@@ -18,12 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('numbers1');
             $table->integer('numbers2');
-            $table->integer('result')->nullable();
             $table->string('description')->nullable();
             $table->timestamp('date')->nullable();
-            $table->foreignId('user1')->default("0");
-            $table->foreignId('user2')->default("0");
             $table->foreignId('map_id')->default("0");
+            $table->foreignId('player1_id')->default("0");
+            $table->foreignId('player2_id')->default("0");
         });
     }
 

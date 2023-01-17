@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function battles() {
+        return $this->hasMany(Battle::class, 'player1_id')->orWhere('player2_id', $this->id);
+    }
+    public function victories() {
+        return $this->hasMany(Battle::class, 'winner_id');
+    }
+
 }
