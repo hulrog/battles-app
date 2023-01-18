@@ -10,10 +10,10 @@ class Battle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user1',
-        'user2',
-        'numbers1',
-        'numbers2',
+        'player1_id',
+        'player2_id',
+        'army1',
+        'army2',
         'result'
     ];
 
