@@ -14,7 +14,8 @@ class Battle extends Model
         'player2_id',
         'army1',
         'army2',
-        'result'
+        'winner_id',
+        'map_id'
     ];
 
     public function map(){
