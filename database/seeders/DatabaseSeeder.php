@@ -25,7 +25,14 @@ class DatabaseSeeder extends Seeder
         Map::insert([
             ['place'=>'Winterfell','description'=>'Seat of the Starks and the largest castle in the North.'],
             ['place'=>'Harrenhal','description'=>'Monstrous castle built by Harren the Black on the shore of Gods Eye.'],
-            ['place'=>'The Trident','description'=>'The mightiest river in the Seven Kingdoms.']
+            ['place'=>'The Trident','description'=>'The mightiest river in the Seven Kingdoms.'],
+            ['place'=>"King's Landing",'description'=>'The capital of the realm and location of the Iron Throne.'],
+            ['place'=>'Redgrass Field','description'=>'Scene of the decisive battle of the First Blackfyre Rebellion.'],
+            ['place'=>'The Gullet','description'=>'A bay that connects the capital to the Narrow Sea.'],
+            ['place'=>'The Stepstones','description'=>'An archipelago of islands between Dorne nad Essos.'],
+            ['place'=>'The Boneway','description'=>'A treacherous pass through the Red Mountains.'],
+            ['place'=>'Riverrun','description'=>'A castle situated on three rivers from which the Tullies rule the Riverlands.'],
+            ['place'=>'Coldmoat','description'=>'Ancient seat of the Marshals of the Northmarch tha held off many Westermen invasions.']
         ]);
         $battle = new Battle;
         $battle->army1='100';
@@ -67,10 +74,6 @@ class DatabaseSeeder extends Seeder
 
         User::factory(3)->create();
 
-        $battle = Battle::find(1);
-        $battle->player1_id="1";
-        $battle->player2_id="2";
-        $battle->winner_id="2";
-        $battle->save();
+        Battle::factory(10)->create();
     }
 }

@@ -37,11 +37,15 @@ class BattleFactory extends Factory
             $winner_id = $ids[1];
         }
 
+        // mapa
+        $map = mt_rand(1,10);
+
         return [
             'player1_id' => $ids[0],
             'player2_id' => $ids[1],
             'army1' => $army1,
             'army2' => $army2,
+            'map_id' => $map,
             'winner_id' => $winner_id,
             'date' => now()
         ];
