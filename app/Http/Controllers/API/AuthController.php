@@ -58,11 +58,6 @@ class AuthController extends Controller
 
         return ['message' => "You have left the Command Post!"];
 
-        $user = User::where('email',$request['email'])->firstOrFail();
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json(['message'=>"Hi ".$user->name.", welcome to home",
-            'acceess_token' => $token, 
-            'token_type' => 'Bearer']);
     }
 }
 
