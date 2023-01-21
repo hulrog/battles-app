@@ -114,7 +114,7 @@ class BattleController extends Controller
         
         $map_id = $request->map_id;
         $army1 = $request->army1;
-        $army2 = $battle->player2_id;
+        $army2 = $battle->army2;
         $winner_id = 0;
         if($army1 > $army2){
             $winner_id = $player1_id;
