@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BattleCollection;
 use App\Models\Battle;
-use Illuminate\Http\Request;
 
 class UserBattleController extends Controller
 {
@@ -13,7 +13,17 @@ class UserBattleController extends Controller
 
         if(is_null($battles)){
             return response()->json('Error 404 - Not found.', 404);
+        }       
+        return new BattleCollection($battles);
+    }
+
+    public function wins($user_id)
+    {
+        $battles = Battle::where('winner_id', $user_id)->get();
+
+        if(is_null($battles)){
+            return response()->json('Error 404 - Not found.', 404);
         }
-        return response()->json($battles);
+        return new BattleCollection($battles);
     }
 }

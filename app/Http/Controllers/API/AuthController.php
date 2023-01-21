@@ -43,7 +43,7 @@ class AuthController extends Controller
 
         $user = User::where('email',$request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json(['message'=>"Greetings".$user->name.", welcome to the Command Post",
+        return response()->json(['message'=>"Greetings ".$user->name.", welcome to the Command Post",
             'acceess_token' => $token, 
             'token_type' => 'Bearer']);
     }
@@ -56,7 +56,7 @@ class AuthController extends Controller
         $user=auth()->user();
         $user->tokens()->delete();
 
-        return ['message' => "You have successfully logged out and token was successfully deleted"];
+        return ['message' => "You have left the Command Post!"];
 
         $user = User::where('email',$request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;

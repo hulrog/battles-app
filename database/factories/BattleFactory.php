@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Battle>
@@ -17,9 +18,10 @@ class BattleFactory extends Factory
     public function definition()
     {
         // da bi generisao razlicite
+        $max_user_id = DB::table('users')->max('id');
         $ids = array();
         while (count($ids) < 2) {
-            $random = mt_rand(1, 5);
+            $random = mt_rand(1, $max_user_id);
             if (!in_array($random, $ids)) {
                 $ids[] = $random;
             }
@@ -38,7 +40,8 @@ class BattleFactory extends Factory
         }
 
         // mapa
-        $map = mt_rand(1,10);
+        $max_map_id = DB::table('maps')->max('id');
+        $map = mt_rand(1,$max_map_id);
 
         return [
             'player1_id' => $ids[0],

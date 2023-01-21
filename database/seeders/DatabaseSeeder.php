@@ -34,45 +34,14 @@ class DatabaseSeeder extends Seeder
             ['place'=>'Riverrun','description'=>'A castle situated on three rivers from which the Tullies rule the Riverlands.'],
             ['place'=>'Coldmoat','description'=>'Ancient seat of the Marshals of the Northmarch tha held off many Westermen invasions.']
         ]);
-        $battle = new Battle;
-        $battle->army1='100';
-        $battle->army2='200';
-        $battle->map_id=1;
-        $battle->save();
-
-        $battle = new Battle;
-        $battle->army1='10000';
-        $battle->army2='2000';
-        $battle->map_id=2;
-        $battle->save();
-
-        $battle = new Battle;
-        $battle->army1='23000';
-        $battle->army2='25000';
-        $battle->map_id=3;
-        $battle->save();
-
-        $battle = new Battle;
-        $battle->army1='5000';
-        $battle->army2='3500';
-        $battle->map_id=1;
-        $battle->save();
-
-        Map::find(1)->battles;
 
         $user = new User;
-        $user->name = "petar";
-        $user->email = "petar99t@gmail.com";
-        $user->password = bcrypt("petar123");
+        $user->name = "admin";
+        $user->email = "admin@gmail.com";
+        $user->password = bcrypt("admin");
         $user->save();
 
-        $user = new User;
-        $user->name = "sone";
-        $user->email = "soneM@gmail.com";
-        $user->password = bcrypt("sone123");
-        $user->save();
-
-        User::factory(3)->create();
+        User::factory(5)->create();
 
         Battle::factory(10)->create();
     }

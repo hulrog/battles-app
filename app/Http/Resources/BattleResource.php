@@ -17,6 +17,7 @@ class BattleResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'map' => new MapResource($this->resource->map),
+            'size' => $this->resource->army1 . " VS " . $this->resource->army2,
             'player1' => new UserResource($this->resource->player1),
             'player2' => new UserResource($this->resource->player2),
             'winner' => new UserResource($this->resource->winner)

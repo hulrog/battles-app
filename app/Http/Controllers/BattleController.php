@@ -23,16 +23,6 @@ class BattleController extends Controller
         return new BattleCollection($battles);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-        
-    // }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +33,7 @@ class BattleController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'army1' => 'required|integer',
-            //'map_id' => 'required|string'
+            'map_id' => 'required|string'
         ]);
 
         if($validator->fails()){
@@ -78,8 +68,6 @@ class BattleController extends Controller
         $request->merge(['army2' => $army2]);
         $request->merge(['winner_id'=> $winner_id]);
 
-        //za mapu test
-        $request->merge(['map_id'=> mt_rand(1,3)]);
 
         $battle = Battle::create($request->all());
     
@@ -98,17 +86,6 @@ class BattleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Battle  $battle
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Battle $battle)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -117,7 +94,40 @@ class BattleController extends Controller
      */
     public function update(Request $request, Battle $battle)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'army1' => 'required|integer',
+            'map_id' => 'required|string'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        //ovde vec ima player2_id i army2, koristim njih
+        $player1_id = auth()->id();
+
+        if($player1_id != $battle->player1_id){
+            return response()->json("Unable to edit other people's battles. Only your own battles as player1");
+        }
+
+        $player2_id = $battle->player2_id;
+        
+        $map_id = $request->map_id;
+        $army1 = $request->army1;
+        $army2 = $battle->player2_id;
+        $winner_id = 0;
+        if($army1 > $army2){
+            $winner_id = $player1_id;
+        }else{
+            $winner_id = $player2_id;
+        }
+
+        $battle->army1 = $army1;
+        $battle->map_id = $map_id;
+        $battle->winner_id = $winner_id;
+        $battle->save();
+    
+        return response()->json(['Battle updated.', new BattleResource($battle)]);
     }
 
     /**
@@ -128,6 +138,7 @@ class BattleController extends Controller
      */
     public function destroy(Battle $battle)
     {
-        //
+        $battle->delete();
+        return response()->json("Battle deleted successfully.");
     }
 }
